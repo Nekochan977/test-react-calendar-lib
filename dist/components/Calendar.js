@@ -10,10 +10,20 @@ var _react = _interopRequireWildcard(require("react"));
 var _Cell = _interopRequireDefault(require("./Cell"));
 var _dateFns = require("date-fns");
 require("./Calendar.css");
+var _propTypes = _interopRequireDefault(require("prop-types"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 const weekDays = ["Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun"];
+/**
+ * Creates a calendar component with label and input elements
+ * @param className: to customise the calendar css
+ * @param text: customise label text
+ * @param handleMyClick: function to retrieve the date
+ * @param ID to add an ID to the input
+ * @return { component }
+ */
+
 const Calendar = _ref => {
   let {
     className,
@@ -51,7 +61,9 @@ const Calendar = _ref => {
   };
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "calendar-block"
-  }, /*#__PURE__*/_react.default.createElement("label", null, text), /*#__PURE__*/_react.default.createElement("input", {
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: ID
+  }, text), /*#__PURE__*/_react.default.createElement("input", {
     id: ID,
     className: "calendar-input",
     onClick: showCalendar,
@@ -107,3 +119,9 @@ const Calendar = _ref => {
 };
 var _default = Calendar;
 exports.default = _default;
+Calendar.propTypes = {
+  className: _propTypes.default.string,
+  text: _propTypes.default.string,
+  handleMyClick: _propTypes.default.func,
+  ID: _propTypes.default.string
+};
