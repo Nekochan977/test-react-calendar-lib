@@ -4,11 +4,19 @@ import Cell from "./Cell"
 import {add, differenceInDays, endOfMonth, format, setDate, startOfMonth, sub} from "date-fns"
 import {useState} from "react"
 import "./Calendar.css"
+import PropTypes from "prop-types";
 
 const weekDays = ["Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun" ]
+/**
+ * Creates a calendar component with label and input elements
+ * @param className: to customise the calendar css
+ * @param text: customise label text
+ * @param handleMyClick: function to retrieve the date
+ * @param ID to add an ID to the input
+ * @return { component }
+ */
 
-
-const Calendar = ({className, text, handleMyClick, ID}) => {
+const Calendar = ({className, text, handleMyClick, ID }) => {
     const [openCalendar, setOpenCalendar] = useState(false)
     const [currentDate, setCurrentDate] = useState(new Date())
 
@@ -38,7 +46,7 @@ const Calendar = ({className, text, handleMyClick, ID}) => {
     return(
         <div>
             <div className={"calendar-block"}>
-                <label>{text}</label>
+                <label htmlFor={ID}>{text}</label>
                 <input id={ID} className={"calendar-input"} onClick={showCalendar} onChange={()=>{}} value={format(currentDate, "PPP")}/>
             </div>
             {openCalendar === true ?
@@ -78,3 +86,10 @@ const Calendar = ({className, text, handleMyClick, ID}) => {
 }
 
 export default Calendar
+
+Calendar.propTypes = {
+    className: PropTypes.string,
+    text: PropTypes.string,
+    handleMyClick: PropTypes.func,
+    ID: PropTypes.string,
+}
